@@ -4,7 +4,7 @@ from tkinter import messagebox
 class InteriorApp:
     def __init__(self):
         self.window = tk.Tk()
-        self.window.title("Interior Destiny!!!!")
+        self.window.title("Interior Destiny")
         self.current_screen = None
         self.layout = None
         self.destiny = None
@@ -17,13 +17,13 @@ class InteriorApp:
         self.current_screen = "Title"
         title_label = tk.Label(self.window, text="Interior Destiny", font=("Arial", 24))
         title_label.pack(pady=20)
-        select_layout_button = tk.Button(self.window, text="Select Layout", command=self.select_layout)
+        select_layout_button = tk.Button(self.window, text="Next", command=self.select_layout)
         select_layout_button.pack()
 
     def select_layout(self):
         self.clear_screen()
         self.current_screen = "SelectLayout"
-        instruction_label = tk.Label(self.window, text="Select a layout:")
+        instruction_label = tk.Label(self.window, text="間取りを選択してください")
         instruction_label.pack(pady=10)
         layout_options = ["1K", "2DK", "3LDK"]
         for layout in layout_options:
