@@ -1,0 +1,16 @@
+<!-- confirmation.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation</title>
+</head>
+<body>
+    <h1>Are you sure you want to improve {{ selected_destiny }}?</h1>
+    <form action="/draw_fortune" method="POST">
+        <button type="submit">OK</button>
+    </form>
+    <form action="/select_destiny" method="GET">
+        <button type="submit">Return</button>
+    </form>
+</body>
+</html>
