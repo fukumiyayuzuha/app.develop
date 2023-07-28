@@ -1,0 +1,17 @@
+<!-- layout_details.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Layout Details</title>
+</head>
+<body>
+    <h1>Selected Layout: {{ selected_layout }}</h1>
+    <form action="/select_destiny" method="POST">
+        {% for destiny in destinies %}
+        <input type="radio" name="destiny" value="{{ destiny }}" id="{{ destiny }}">
+        <label for="{{ destiny }}">{{ destiny }}</label><br>
+        {% endfor %}
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>

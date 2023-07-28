@@ -1,0 +1,16 @@
+<!-- fortune_details.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fortune Details</title>
+</head>
+<body>
+    <h1>Fortune Details</h1>
+    <p>Selected Layout: {{ selected_layout }}</p>
+    <p>Selected Destiny: {{ selected_destiny }}</p>
+    <p>Fortune Percentage: {{ fortune_percentage }}%</p>
+    <form action="/select_layout" method="GET">
+        <button type="submit">Return</button>
+    </form>
+</body>
+</html>

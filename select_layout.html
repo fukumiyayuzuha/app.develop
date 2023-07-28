@@ -1,0 +1,17 @@
+<!-- select_layout.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Layout</title>
+</head>
+<body>
+    <h1>間取りを選択してください</h1>
+    <form action="/select_layout" method="POST">
+        {% for layout in layouts %}
+        <input type="radio" name="layout" value="{{ layout }}" id="{{ layout }}">
+        <label for="{{ layout }}">{{ layout }}</label><br>
+        {% endfor %}
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>

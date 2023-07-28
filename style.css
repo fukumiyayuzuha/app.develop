@@ -1,15 +1,13 @@
 /* style.css */
 body {
-    text-align: center;
-    font-family: Inter;
+    font-family: Arial, sans-serif;
     text-align: center;
     background: rgba(253, 237, 195, 0.44);
-}
 
+}
 h1 {
-    color: black;
+    color: #ff6600;
 }
-
 button {
     background-color: #ff6600;
     color: #ffffff;
@@ -22,16 +20,16 @@ button {
 /*タイトル画面*/
 .title {
     display: flex;
-    padding: 0px 360px 0px 360px;
+    padding: 100px 360px 50px 360px;
     justify-content: center;
     align-items: center;
-    width: 1197px;
-    height: 130px;
+    width: 1000x;
+    height: 1000x;
     flex-shrink: 0;
     color: #000;
     text-align: center;
     font-family: Inter;
-    font-size: 128px;
+    font-size: 100px;
     font-style: italic;
     font-weight: 500;
     line-height: 70px;
