@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="madori">間取りを選択してください</div>
+    {% block content %}
+    {{ txt }}
+    {% endlock %} 
     <form action="/select_layout" method="POST">
         {% for layout in layouts %}
 
