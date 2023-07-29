@@ -1,13 +1,16 @@
-<!-- select_layout.html -->
+<!-- select_layout.html 2番目のHTML-->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Select Layout</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-    <h1>間取りを選択してください</h1>
+    <div class="madori">間取りを選択してください</div>
     <form action="/select_layout" method="POST">
         {% for layout in layouts %}
+
         <input type="radio" name="layout" value="{{ layout }}" id="{{ layout }}">
         <label for="{{ layout }}">{{ layout }}</label><br>
         {% endfor %}

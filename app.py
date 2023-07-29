@@ -47,10 +47,19 @@ interior_app = InteriorApp()
 def home():
     return interior_app.start()
 
-@app.route('/select_layout', methods=['POST', 'GET'])
+#タイトルページ
+@app.route('/')
+def show_title():
+    return render_template('title.html')
+
+#間取り選択ページ
+@app.route('/select_layout', methods=['POST','GET'])
 def select_layout():
+    layouts = ["1K" , "2DK" , "3LDK"]
     if request.method == 'POST':
+        #フォームから送信されたデータを受け取る処理を行う
         selected_layout = request.form['layout']
+        #ここで次のページに遷移する処理を実装する
         return interior_app.show_layout_details(selected_layout)
     else:
         return interior_app.select_layout()
