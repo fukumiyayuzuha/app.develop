@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-
 class InteriorApp:
     def __init__(self):
         self.title = "interior destiny"
@@ -44,22 +43,14 @@ class InteriorApp:
 interior_app = InteriorApp()
 
 @app.route('/')
-def home():
-    return interior_app.start()
-
-#タイトルページ
-@app.route('/')
 def show_title():
-    return render_template('title.html')
+    return interior_app.show_title()
 
-#間取り選択ページ
 @app.route('/select_layout', methods=['POST','GET'])
 def select_layout():
     layouts = ["1K" , "2DK" , "3LDK"]
     if request.method == 'POST':
-        #フォームから送信されたデータを受け取る処理を行う
         selected_layout = request.form['layout']
-        #ここで次のページに遷移する処理を実装する
         return interior_app.show_layout_details(selected_layout)
     else:
         return interior_app.select_layout()
@@ -78,7 +69,3 @@ def draw_fortune():
         return interior_app.draw_fortune()
     else:
         return interior_app.show_fortune_details()
-
-if __name__ == '__main__':
-    app.run()
-
