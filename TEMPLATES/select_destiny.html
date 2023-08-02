@@ -1,12 +1,13 @@
-<!-- layout_details.html 3番目のHTML-->
+<!-- select_destiny.html 3番目のHTML -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Layout Details</title>
+    <title>Select Destiny</title>
 </head>
 <body>
-    <h1>Selected Layout: {{ selected_layout }}</h1>
+    <h1>Select your destiny:</h1>
     <form action="/select_destiny" method="POST">
+        <input type="hidden" name="layout" value="{{ selected_layout }}"> <!-- 選択したレイアウトをhiddenフィールドとして送信 -->
         {% for destiny in destinies %}
         <input type="radio" name="destiny" value="{{ destiny }}" id="{{ destiny }}">
         <label for="{{ destiny }}">{{ destiny }}</label><br>

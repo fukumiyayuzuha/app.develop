@@ -1,10 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
+
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.debug = True
+
 class InteriorApp:
     def __init__(self):
         self.title = "interior destiny"
-        self.layouts = ["1K", "2DK", "3LDK"]
+        self.layouts = ["1K", "2DK", "3LDK"]  # レイアウトの選択肢を追加する
         self.destinies = ["金運", "恋愛運", "仕事運"]
         self.selected_layout = None
         self.selected_destiny = None
@@ -43,25 +47,37 @@ class InteriorApp:
 interior_app = InteriorApp()
 
 @app.route('/')
-def show_title():
-    return interior_app.show_title()
+def home():
+    return interior_app.start()
 
-@app.route('/select_layout', methods=['POST','GET'])
+@app.route('/select_layout', methods=['POST', 'GET'])
 def select_layout():
-    layouts = ["1K" , "2DK" , "3LDK"]
     if request.method == 'POST':
-        selected_layout = request.form['layout']
-        return interior_app.show_layout_details(selected_layout)
+        selected_layout = request.form.get('layout')
+        if selected_layout is not None:
+            # レイアウトが選択されたらselect_destiny.htmlにリダイレクト
+            return redirect('/select_destiny')
+        else:
+            return "Error: Layout not selected"
     else:
         return interior_app.select_layout()
 
 @app.route('/select_destiny', methods=['POST', 'GET'])
 def select_destiny():
     if request.method == 'POST':
-        selected_destiny = request.form['destiny']
-        return interior_app.show_confirmation(selected_destiny)
+        selected_destiny = request.form.get('destiny')
+        if selected_destiny is not None:
+            return interior_app.show_confirmation(selected_destiny)
+        else:
+            return render_template("select_destiny.html", destinies=interior_app.destinies, selected_layout=interior_app.selected_layout)
     else:
-        return interior_app.select_destiny()
+        selected_layout = request.args.get('layout')
+        if selected_layout is not None:
+            return interior_app.select_destiny()
+        else:
+            return redirect(url_for('select_layout'))
+
+
 
 @app.route('/draw_fortune', methods=['POST', 'GET'])
 def draw_fortune():
@@ -69,3 +85,6 @@ def draw_fortune():
         return interior_app.draw_fortune()
     else:
         return interior_app.show_fortune_details()
+
+if __name__ == '__main__':
+    app.run(port=8000)
