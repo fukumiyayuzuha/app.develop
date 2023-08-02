@@ -1,0 +1,14 @@
+<!-- title.html 1番目のHTMLファイル -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>Please tap to proceed.</p>
+    <form action="/select_layout" method="GET"> <!-- ここを修正 -->
+        <button type="submit">Select Layout</button> <!-- ここを追加 -->
+    </form>
+</body>
+</html>
