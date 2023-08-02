@@ -1,4 +1,4 @@
-/* style.css */
+/* style.css デザインの編集は全部ここ*/
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -23,11 +23,9 @@ button {
 /*タイトル画面 title.htmlのcssはここで行う*/
 .title {
     display: flex;
-    padding: 100px 360px 50px 360px;
+    padding: 100px 0px 50px;
     justify-content: center;
     align-items: center;
-    width: 1900x;
-    height: 100x;
     flex-shrink: 0;
     color: #000;
     text-align: center;
@@ -42,12 +40,11 @@ button {
 /*間取り選択画面 select_layout.htmlのcssはここで行う*/
 .madori {
     display: flex;
-    width: 1900px;
     height: 100px;
     flex-shrink: 0;
     color: #000;
     font-family: Inter;
-    font-size: 60px;
+    font-size: 50px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -55,3 +52,51 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+.button01 a{
+    background: #eee;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 240px;
+    padding: 20px 30px;
+    border: 20px 20px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.button01 a::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border: 2px solid #6bb6ff;
+    transition: 0.2s;
+    display: block;
+  }
+  
+  .button01 a::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #333333;
+    border-right: 3px solid #333333;
+    transform: rotate(45deg);
+  }
+  
+  .button01 a:hover::before {
+    top: 0;
+    left: 0;
+  }
+  
+  .button01 a:hover {
+    text-decoration: none;
+    background-color: #b3d9ff;
+  }
+  
