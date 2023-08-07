@@ -1,0 +1,28 @@
+<!-- fortune_details.html 6番目のHTML-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fortune Details</title>
+</head>
+<body>
+    <h1>Fortune Details</h1>
+    <p>Selected layout: {{ selected_layout }}</p>
+    <p>Selected destiny: {{ selected_destiny }}</p>
+    <p>Fortune percentage: {{ fortune_percentage }}%</p>
+    <p>今日の気温: {{ fortune_data.hourly.temperature_2m[0] }}°C</p>
+    
+    <h2>1時間ごとの降水量</h2>
+    <ul>
+        {% for data in fortune_data.hourly.precipitation %}
+            <li>{{ data }} mm</li>
+        {% endfor %}
+    </ul>
+
+    <form action="/draw_fortune" method="get">
+        <input type="submit" value="おみくじを引く">
+    </form>
+</body>
+</html>
+
+
+これ結局使ってないしいらないかも
