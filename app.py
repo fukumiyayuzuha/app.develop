@@ -28,27 +28,17 @@ class InteriorApp:
     def show_layout_details(self, selected_layout):
         self.selected_layout = selected_layout
         return render_template("layout_details.html", selected_layout=selected_layout)
+    
+    def select_destiny(self):
+        return render_template("select_destiny.html", destinies=self.destinies)
+    
+    def show_confirmation(self, selected_destiny):
+        self.selected_destiny = selected_destiny
+        return render_template("confirmation.html", selected_destiny=selected_destiny)
 
 
     def confirmation(self, selected_destiny):
         return render_template("confirmation.html", selected_destiny=selected_destiny)
-
-
-    def draw_fortune(self):
-        import random
-        self.fortune_percentage = random.randint(0, 100)
-        return render_template("confirmation.html", fortune_percentage=self.fortune_percentage)
-
-    def get_fortune_data(self):
-        url = 'https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=rain&timezone=Asia%2FTokyo'
-
-        response = requests.get(url)
-
-        if response.status_code == 200:
-            json_data = response.json()
-            return json_data
-        else:
-            return None
     
     def draw_fortune(self):
         fortune_data = self.get_fortune_data()
@@ -56,6 +46,24 @@ class InteriorApp:
             return render_template("draw_fortune.html", fortune_data=fortune_data)
         else:
             return "Error: Failed to fetch data from the API."
+
+    def get_fortune_data(self):
+        url = 'https://api.open-meteo.com/v1/forecast'
+        
+        query_params = {
+            'latitude': '35.0211',
+            'longitude': '135.7538',
+            'hourly': 'rain',
+            'timezone': 'Asia/Tokyo',
+        }
+
+        response = requests.get(url, params=query_params) # APIにリクエストを送信してレスポンスを取得します
+
+        if response.status_code == 200:
+            json_data = response.json()
+            return json_data
+        else:
+            return None
 
 
 
@@ -70,11 +78,30 @@ def home():
 
 @app.route('/select_layout', methods=['POST', 'GET'])
 def select_layout():
-    app_instance = InteriorApp()
     if request.method == 'POST':
-        selected_layout = request.form['layout']
-        return app_instance.show_layout_details(selected_layout)
-    return app_instance.select_layout()
+        selected_layout = request.form.get('layout')
+        if selected_layout is not None:
+            # レイアウトが選択されたらselect_destiny.htmlにリダイレクト
+            return redirect('/select_destiny')
+        else:
+            return "Error: Layout not selected"
+    else:
+        return interior_app.select_layout()
+    
+@app.route('/select_destiny', methods=['POST', 'GET'])
+def select_destiny():
+    if request.method == 'POST':
+        selected_destiny = request.form.get('destiny')
+        if selected_destiny is not None:
+            return interior_app.show_confirmation(selected_destiny)
+        else:
+            return render_template("select_destiny.html", destinies=interior_app.destinies, selected_layout=interior_app.selected_layout)
+    else:
+        selected_layout = request.args.get('layout')
+        if selected_layout is not None:
+            return interior_app.select_destiny()
+        else:
+            return redirect(url_for('select_layout'))
 
 @app.route('/confirmation', methods=['POST', 'GET'])
 def confirmation():
@@ -88,7 +115,7 @@ def confirmation():
 
 
 
-@app.route('/draw_fortune')
+@app.route('/draw_fortune', methods=['POST'])
 def draw_fortune():
     app_instance = InteriorApp()
     return app_instance.draw_fortune()
