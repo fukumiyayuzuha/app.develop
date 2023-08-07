@@ -1,16 +1,18 @@
-<!-- confirmation.html 4番目のHTML-->
+<!-- confirmation.html 3番目のHTML -->
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Confirmation</title>
-</head>
-<body>
-    <h1>Are you sure you want to improve {{ selected_destiny }}?</h1>
+  </head>
+  <body>
+    <h1>Are you sure you want to improve {{ selected_layout }}?</h1>
     <form action="/draw_fortune" method="POST">
-        <button type="submit">OK</button>
+      <input type="hidden" name="destiny" value="{{ selected_destiny }}" />
+      <button type="submit">おみくじをひく</button>
     </form>
-    <form action="/select_destiny" method="GET">
-        <button type="submit">Return</button>
+
+    <form action="/select_layout" method="GET">
+      <button type="submit">Return</button>
     </form>
-</body>
+  </body>
 </html>

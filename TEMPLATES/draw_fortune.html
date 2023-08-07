@@ -1,13 +1,105 @@
-<!-- draw_fortune.html 5番目のHTML-->
+<!-- draw_fortune.html 4番目のHTML -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Draw Fortune</title>
+    <script>
+        function getFortuneData(destiny) {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=35.0211&longitude=135.7538&hourly=rain,cloudcover&timezone=Asia%2FTokyo`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && 'hourly' in data && 'rain' in data['hourly']) {
+                        const rain = data['hourly']['rain'][0];
+                        document.getElementById('rain-result').textContent = `今日の降水量は...${rain} mmです！`;
+
+                        const resultDiv = document.getElementById('fortune-result');
+                        resultDiv.innerHTML = `<h2>結果</h2>
+                            <p>今日の降水量は・・・${rain}mmです！</p>
+                            ${getFortuneResult(destiny, rain > 0)}`;
+                    } else {
+                        document.getElementById('rain-result').textContent = 'Error: 天候情報を取得できませんでした。';
+                        document.getElementById('fortune-result').textContent = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching fortune data:', error);
+                    document.getElementById('rain-result').textContent = 'Error: 天候情報の取得中にエラーが発生しました。';
+                    document.getElementById('fortune-result').textContent = '';
+                });
+        }
+
+        function getFortuneResult(destiny, isSunny) {
+            const sunnyFortuneResults = {
+                '金運': [
+                    '窓をあける',
+                    '洗濯をする',
+                    '黄色い物を西に置く',
+                    '財布の中のお金を数える',
+                    '玄関に観葉植物を置く',
+                    // 他の晴れの金運の結果を追加
+                ],
+                '恋愛運': [
+                    '窓を開けて風通しよくする',
+                    '南東にピンクのものを置く',
+                    '花を飾る',
+                    'リビングに白のものを置く。',
+                    'クッションを整える',
+                    // 他の晴れの恋愛運の結果を追加
+                ],
+                '仕事運': [
+                    'デスクを窓際に置く',
+                    'イエローの小物をデスクに置く',
+                    '収納スペーススペースを整理整頓する',
+                    'モチベーションを高めるアートを飾る',
+                    '快適な椅子を使う',
+                    // 他の晴れの仕事運の結果を追加
+                ]
+            };
+
+            const rainyFortuneResults = {
+                '金運': [
+                    '傘にゴールドのリボンをつけ玄関に置く',
+                    'ハンガーを洗面所におく',
+                    '鏡をいつもと逆の方に向ける',
+                    'ゴミ箱の位置を変える',
+                    '寝室の枕の位置を逆にする',
+                    // 他の雨の金運の結果を追加
+                ],
+                '恋愛運': [
+                    '換気をする',
+                    '長い傘を玄関におく',
+                    '寝室でアロマを焚く',
+                    'テーブルの位置を変える',
+                    '水回りに花を活ける',
+                    // 他の雨の恋愛運の結果を追加
+                ],
+                '仕事運': [
+                    '窓をあける',
+                    '木製のデスクを使う',
+                    '間接照明など温かみの照明を使う',
+                    'アロマディフューザーを置く　ラベンダーやシトラス系の香りがおすすめ',
+                    'ブランケットを使う',
+                    // 他の雨の仕事運の結果を追加
+                ]
+            };
+
+            const randomResults = isSunny ? sunnyFortuneResults[destiny] : rainyFortuneResults[destiny];
+            const randomResult = randomResults[Math.floor(Math.random() * randomResults.length)];
+
+            return `
+                <h2>${destiny}を選択して${isSunny ? '晴れ' : '雨'}の場合</h2>
+                <p>${randomResult}</p>
+                `;
+        }
+    </script>
 </head>
 <body>
-    <h1>You drew a fortune!</h1>
-    <form action="/show_fortune_details" method="POST">
-        <button type="submit">View Fortune Details</button>
-    </form>
+    <h1>おみくじ結果</h1>
+    <button onclick="getFortuneData('金運')">金運</button>
+    <button onclick="getFortuneData('恋愛運')">恋愛運</button>
+    <button onclick="getFortuneData('仕事運')">仕事運</button>
+    <div id="rain-result"></div>
+    <div id="fortune-result"></div>
 </body>
 </html>

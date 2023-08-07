@@ -6,12 +6,12 @@
 </head>
 <body>
     <h1>Select a layout:</h1>
-    <form action="/select_destiny" method="POST"> <!-- /select_layout から /select_destiny に修正 -->
+    <form action="/confirmation" method="POST">
         {% for layout in layouts %}
         <input type="radio" name="layout" value="{{ layout }}" id="{{ layout }}">
         <label for="{{ layout }}">{{ layout }}</label><br>
         {% endfor %}
-        <button type="submit">Next</button>
+        <button type="submit">おみくじをひく</button>
     </form>
 </body>
 </html>
