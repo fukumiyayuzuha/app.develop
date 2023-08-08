@@ -9,7 +9,8 @@
     {% if fortune_data and 'hourly' in fortune_data and 'rain' in fortune_data['hourly'] %}
         <p>今日の降水量は...{{ fortune_data['hourly']['rain'][0]}} mmです！</p>
     {% else %}
-        <p>Error: 天候情報を取得できませんでした。</p>
+        <p>Error: 天候情報を取得できませんでした。draw_fortune.htmlのエラー</p>
     {% endif %}
+    <p>{{ fortune_result }}</p>
 </body>
 </html>

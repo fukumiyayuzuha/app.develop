@@ -43,9 +43,11 @@ class InteriorApp:
     def draw_fortune(self):
         fortune_data = self.get_fortune_data()
         if fortune_data:
-            return render_template("draw_fortune.html", fortune_data=fortune_data)
+            rain_mm = fortune_data.get('hourly', {}).get('rain', 0)
+            fortune_result = self.get_fortune_result(rain_mm)
+            return render_template("draw_fortune.html", fortune_result=fortune_result, fortune_data=fortune_data)
         else:
-            return "Error: Failed to fetch data from the API."
+            return "Error: Failed to fetch data from the API.app.pyコードのエラー"
 
     def get_fortune_data(self):
         url = 'https://api.open-meteo.com/v1/forecast'
@@ -63,7 +65,18 @@ class InteriorApp:
             json_data = response.json()
             return json_data
         else:
+            print('Error: Failed to fetch data from the API. Status code:', response.status_code)
             return None
+        
+    def get_fortune_result(self, rain_mm):
+        import random
+        # 降水量が0mmなら晴れ、それ以外なら雨と判定
+        if rain_mm == 0.00:
+            fortune = random.choice(['金運の雨', '恋愛運の雨', '仕事運の雨'])
+        else:
+            fortune = random.choice(['金運の晴れ', '恋愛運の晴れ', '仕事運の晴れ'])
+
+        return fortune
 
 
 
