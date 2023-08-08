@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.debug = True
+app.debug = False
 
 class InteriorApp:
     def __init__(self):
@@ -106,7 +106,7 @@ def select_destiny():
     if request.method == 'POST':
         selected_destiny = request.form.get('destiny')
         if selected_destiny is not None:
-            return interior_app.show_confirmation(selected_destiny)
+            return render_template("draw_fortune.html",  fortune_data=None,selected_destiny=selected_destiny)
         else:
             return render_template("select_destiny.html", destinies=interior_app.destinies, selected_layout=interior_app.selected_layout)
     else:
