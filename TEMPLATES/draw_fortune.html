@@ -1,17 +1,18 @@
-<!-- draw_fortune.html おみくじをひくっていう画面-->
+<!-- draw_fortune.html おみくじをひくっていう画面 -->
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Draw Fortune</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" />
+  </head>
+  <body>
     <h1>おみくじ結果</h1>
     {% if fortune_data and 'hourly' in fortune_data and 'rain' in fortune_data['hourly'] %}
-        <p>今日の降水量は...{{ fortune_data['hourly']['rain'][0]}} mmです！</p>
-        <p>{{ selected_destiny }}のおみくじ結果: {{ fortune_result }}</p>
+      <p>今日の降水量は...{{ fortune_data['hourly']['rain'][0] }} mmです！</p>
+      <p>{{ selected_destiny }}のおみくじ結果: {{ fortune_result }}</p>
     {% else %}
-        <p>Error: 天候情報を取得できませんでした。draw_fortune.htmlのエラー</p>
+      <p>Error: 天候情報を取得できませんでした。draw_fortune.htmlのエラー</p>
     {% endif %}
-    <img src="C:\Users\fukum\app.develop\images\omikuji_6573.png" alt="あああ">
+    <img src="{{ url_for('static', filename = 'images/omikuji_6573.png') }}" />
+  </body>
 </html>

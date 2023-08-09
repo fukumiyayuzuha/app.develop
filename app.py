@@ -6,6 +6,9 @@ app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.debug = True
 
+# 静的ファイルの配置場所を指定する場合（デフォルトは 'static' ディレクトリ）
+app.static_folder = 'static'
+
 
 class InteriorApp:
     def __init__(self):
