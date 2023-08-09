@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Draw Fortune</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
 </head>
 <body>
     <h1>おみくじ結果</h1>
@@ -12,6 +13,6 @@
     {% else %}
         <p>Error: 天候情報を取得できませんでした。draw_fortune.htmlのエラー</p>
     {% endif %}
-    
+    <img src="../images/omikuji_6573.png">
 </body>
 </html>
