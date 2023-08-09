@@ -5,7 +5,7 @@
     <title>Select Destiny</title>
 </head>
 <body>
-    <h1>Select your destiny:</h1>
+    <h1>あげたい運気を選んでください</h1>
     <form action="/select_destiny" method="POST">
         <input type="hidden" name="layout" value="{{ selected_layout }}"> <!-- 選択したレイアウトをhiddenフィールドとして送信 -->
         {% for destiny in destinies %}

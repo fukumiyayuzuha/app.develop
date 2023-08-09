@@ -5,14 +5,14 @@
     <title>Confirmation</title>
   </head>
   <body>
-    <h1>Are you sure you want to improve {{ selected_layout }}?</h1>
+    <h1>よろしいでしょうか？{{ selected_layout }}</h1>
     <form action="/draw_fortune" method="POST">
       <input type="hidden" name="destiny" value="{{ selected_destiny }}" />
       <button type="submit">おみくじをひく</button>
     </form>
 
     <form action="/select_layout" method="GET">
-      <button type="submit">Return</button>
+      <button type="submit">戻る</button>
     </form>
   </body>
 </html>

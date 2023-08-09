@@ -5,7 +5,7 @@
     <title>Select Layout</title>
 </head>
 <body>
-    <h1>Select a layout:</h1>
+    <h1>間取りを選択してください</h1>
     <form action="/select_destiny" method="POST"> <!-- /select_layout から /select_destiny に修正 -->
         {% for layout in layouts %}
         <input type="radio" name="layout" value="{{ layout }}" id="{{ layout }}">
