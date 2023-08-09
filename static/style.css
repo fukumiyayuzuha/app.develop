@@ -1,102 +1,84 @@
-/* style.css デザインの編集は全部ここ*/
+/* style.css デザインの編集は全部ここ */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: rgba(253, 237, 195, 0.44);
-
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: rgba(253, 237, 195, 0.44);
+  margin: 20; /* ページ全体の余白を削除 */
 }
 
 h1 {
-    color: #ff6600;
+  color: #000;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0.5em 0; /* マージンを追加 */
 }
 
 button {
-    background-color: #f8bfb3;
-    color: black;
-    border-radius: 10px;
-    padding: 20px 30px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
+  background-color: #f8bfb3;
+  color: black;
+  border-radius: 10px;
+  padding: 20px 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-/*タイトル画面 title.htmlのcssはここで行う*/
-.title {
-    display: flex;
-    padding: 100px 0px 50px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-family: Inter;
-    font-size: 90px;
-    font-style: italic;
-    font-weight: 500;
-    line-height: 70px;
-    /* 54.688% */
+/* タイトル画面 title.htmlのcssはここで行う */
+.taitol {
+  color: #273863;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  flex-shrink: 0;
+  background: rgba(21, 199, 238, 0.28);
+  width: auto;
+  font-size: 90px;
+  padding: 170px;
+  display: inline-block;
 }
 
-/*間取り選択画面 select_layout.htmlのcssはここで行う*/
-.madori {
-    display: flex;
-    height: 100px;
-    flex-shrink: 0;
-    color: #000;
-    font-family: Inter;
-    font-size: 50px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+/* 間取り選択画面 select_layout.htmlのcssはここで行う */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
 
-.button01 a{
-    background: #eee;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 240px;
-    padding: 20px 30px;
-    border: 20px 20px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    font-size: 20px;
+/* ラジオボタンのスタイル */
+.radio-inline__input {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
 }
 
-.button01 a::before {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
-    border: 2px solid #6bb6ff;
-    transition: 0.2s;
-    display: block;
-  }
-  
-  .button01 a::after {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-top: 3px solid #333333;
-    border-right: 3px solid #333333;
-    transform: rotate(45deg);
-  }
-  
-  .button01 a:hover::before {
-    top: 0;
-    left: 0;
-  }
-  
-  .button01 a:hover {
-    text-decoration: none;
-    background-color: #b3d9ff;
-  }
-  
+/* カスタムラジオボタンのスタイル */
+.radio-inline__label {
+  display: inline-block;
+  padding: 20px 35px;
+  margin-right: 18px;
+  border-radius: 3px;
+  transition: all .2s;
+  cursor: pointer; /* カーソルを追加 */
+  font-size: 20px;
+}
+
+.radio-inline__input:checked + .radio-inline__label {
+  border-radius: 10px;
+  background: rgba(118, 223, 229, 0.51);
+  text-shadow: 0 0 1px rgba(0,0,0,.7);
+}
+
+.radio-inline__input:focus + .radio-inline__label {
+  outline-color: #4D90FE;
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+}

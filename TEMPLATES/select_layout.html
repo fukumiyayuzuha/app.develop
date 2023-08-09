@@ -3,14 +3,20 @@
 <html>
 <head>
     <title>Select Layout</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}">
 </head>
 <body>
     <h1>間取りを選択してください</h1>
-    <form action="/select_destiny" method="POST"> <!-- /select_layout から /select_destiny に修正 -->
-        {% for layout in layouts %}
-        <input type="radio" name="layout" value="{{ layout }}" id="{{ layout }}">
-        <label for="{{ layout }}">{{ layout }}</label><br>
-        {% endfor %}
+    <form action="/select_destiny" method="POST">
+        <fieldset>
+            {% for layout in layouts %}
+            <input id="{{ layout }}" class="radio-inline__input" type="radio" name="layout" value="{{ layout }}"
+                   {% if layout == '3ldk' %}checked="checked"{% endif %}/>
+            <label class="radio-inline__label" for="{{ layout }}">
+                {{ layout }}
+            </label><br>
+            {% endfor %}
+        </fieldset>
         <button type="submit">Next</button>
     </form>
 </body>
