@@ -42,10 +42,10 @@ class InteriorApp:
     
     def draw_fortune(self):
         fortune_data = self.get_fortune_data()
-        if fortune_data:
+        selected_destiny = self.selected_destiny
+        if fortune_data and selected_destiny is not None:
             rain_mm = fortune_data.get('hourly', {}).get('rain', 0)
-            fortune_result = self.get_fortune_result(rain_mm)
-            
+            fortune_result = self.get_fortune_result(rain_mm, selected_destiny)   
             return render_template("draw_fortune.html", fortune_result=fortune_result, fortune_data=fortune_data, selected_destiny=self.selected_destiny)
         else:
             return "Error: Failed to fetch data from the API.app.pyコードのエラー"
@@ -67,15 +67,97 @@ class InteriorApp:
             print('Error: Failed to fetch data from the API. Status code:', response.status_code)
             return None
 
-    def get_fortune_result(self, rain_mm):
-        import random
-        # 降水量が0mmなら晴れ、それ以外なら雨と判定
-        if rain_mm == 0.00:
-            fortune = random.choice(['金運の雨', '恋愛運の雨', '仕事運の雨'])
-        else:
-            fortune = random.choice(['金運の晴れ１', '恋愛運の晴れ１', '仕事運の晴れ１'])
+    
 
+    def get_fortune_result(self, rain_mm, selected_destiny):
+        import random
+        
+        #こっちに雨の場合のおみくじ結果を書く
+        if rain_mm == 0.0:
+            if selected_destiny == '金運':
+                fortune = random.choice([
+                    '傘にゴールドのリボンをつけ玄関に置く',
+                    'ハンガーを洗面所におく',
+                    '鏡をいつもと逆の方に向ける',
+                    'ゴミ箱の位置を変える',
+                    '寝室の枕の位置を逆にする',
+                    '水回りの掃除',
+                    '料理の際に自然の音楽を流す',
+                    '窓をあける',
+                    'テレビのリモコンの置く位置を変える',
+                    '冷蔵庫の中を整理整頓',
+                ])
+            elif selected_destiny == '恋愛運':
+                fortune = random.choice([
+                    '換気をする',
+                    '長い傘を玄関に置く',
+                    '寝室でアロマを焚く',
+                    'テーブルの位置を変える',
+                    '水回りに花を活ける',
+                    'シンクの掃除',
+                    'ベットメイキング',
+                    '部屋の明るい所で本を読む',
+                    'リビングで音楽をかける',
+                    'カーテンをなるべく閉める'
+                ])
+            elif selected_destiny == '仕事運':
+                fortune = random.choice([
+                    '窓をあける',
+                    '木製のデスクを使う',
+                    '間接照明など温かみの照明を使う'
+                    'アロマディフューザーを置く',
+                    'ブランケットを使う',
+                    '窓辺に観葉植物を置く',
+                    'ローズゴールドや銅色の小物を置く',
+                    'ハーバリウムを置く',
+                    'コーヒーメーカーやお気に入りのマグカップを置く',
+                    'アーティストの絵筆セットをデスクに置く'
+                ])
+        
+        #こっちに晴れの場合のおみくじ結果を書く
+        else:
+            if selected_destiny == '金運':
+                fortune = random.choice([
+                    '窓をあける',
+                    '洗濯をする',
+                    '黄色い物を西に置く',
+                    '財布の中のお金を数える',
+                    '玄関に観葉植物を置く',
+                    '玄関に鏡を置く',
+                    '北枕にして寝る',
+                    'カーテンに薄い黄色のものを貼る',
+                    'カーテンを一日中あけておく',
+                    '靴を靴箱にしまう'
+                ])
+            elif selected_destiny == '恋愛運':
+                fortune = random.choice([
+                    '窓を開けて風通しよくする',
+                    '南東にピンクのものを置く',
+                    '花を飾る',
+                    'リビングに白のものを置く',
+                    'クッションを整える',
+                    '玄関に観葉植物を置く',
+                    '香水を部屋にかける',
+                    'ベットメイキング',
+                    '枕の向きを南東にする',
+                    '玄関マットを敷く'
+                ])
+            elif selected_destiny == '仕事運':
+                fortune = random.choice([
+                    'デスクを窓際に置く',
+                    'イエローの小物をデスクに置く',
+                    '収納スペースを整理整頓する',
+                    'モチベーションを高めるアートを飾る',
+                    '快適な椅子を使う',
+                    '観葉植物を机の上に置く',
+                    'ブラインドを使う',
+                    'ウォールボードを置く',
+                    '自己啓発本を本棚に置く',
+                    'クッションを椅子に置く'
+                ])
+        
         return fortune
+
 
     def show_fortune_details(self):
         return render_template("fortune_details.html", selected_layout=self.selected_layout, selected_destiny=self.selected_destiny, fortune_percentage=self.fortune_percentage)
