@@ -4,15 +4,20 @@
   <head>
     <title>{{ title }}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <style>
+      .taitol img {
+        margin-bottom: 5px; /* 画像とタイトルの間隔を調整 */
+      }
+    </style>
   </head>
   <body>
     <div class="taitol">
       <img src="{{ url_for('static', filename = 'images/R1.png') }}" />
       {{ title }}
-      <form action="/select_layout" method="GET"> <!-- ここを修正 -->
-        <button type="submit">Select Layout</button> <!-- ここを追加 -->
-    </form>
+      <form action="/select_layout" method="GET">
+        <button type="submit">Select Layout</button>
+      </form>
     </div>
   </body>
 </html>

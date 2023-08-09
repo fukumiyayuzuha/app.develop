@@ -1,18 +1,21 @@
-<!-- draw_fortune.html おみくじをひくっていう画面 -->
+<!-- draw_fortune.html -->
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Draw Fortune</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" />
-  </head>
-  <body>
+</head>
+<body>
     <h1>おみくじ結果</h1>
-    {% if fortune_data and 'hourly' in fortune_data and 'rain' in fortune_data['hourly'] %}
-      <p>今日の降水量は...{{ fortune_data['hourly']['rain'][0] }} mmです！</p>
-      <p>{{ selected_destiny }}のおみくじ結果: {{ fortune_result }}</p>
-    {% else %}
-      <p>Error: 天候情報を取得できませんでした。draw_fortune.htmlのエラー</p>
-    {% endif %}
-    <img src="{{ url_for('static', filename = 'images/omikuji_6573.png') }}" />
-  </body>
+    <div class="haikei" style="background-image: url('{{ url_for('static', filename='images/Frame21.jpg') }}');">
+        {% if fortune_data and 'hourly' in fortune_data and 'rain' in fortune_data['hourly'] %}<br><br><br>
+            <p>今日の降水量は...{{ fortune_data['hourly']['rain'][0] }} mmです！</p>
+            <p>{{ selected_destiny }}のおみくじ結果: {{ fortune_result }}</p><br><br><br><br>
+        {% else %}
+            <p>Error: 天候情報を取得できませんでした。draw_fortune.htmlのエラー</p>
+        {% endif %}
+        <img src="{{ url_for('static', filename='images/Frame25.jpg') }}">
+
+    </div>
+</body>
 </html>
