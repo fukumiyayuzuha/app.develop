@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.debug = True
+app.debug = False
 
 
 class InteriorApp:
@@ -66,8 +66,6 @@ class InteriorApp:
         else:
             print('Error: Failed to fetch data from the API. Status code:', response.status_code)
             return None
-
-    
 
     def get_fortune_result(self, rain_mm, selected_destiny):
         import random
@@ -157,8 +155,7 @@ class InteriorApp:
                 ])
         
         return fortune
-
-
+    
     def show_fortune_details(self):
         return render_template("fortune_details.html", selected_layout=self.selected_layout, selected_destiny=self.selected_destiny, fortune_percentage=self.fortune_percentage)
     
