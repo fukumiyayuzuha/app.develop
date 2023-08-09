@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.debug = False
+app.debug = True
 
 
 class InteriorApp:
@@ -208,6 +208,9 @@ def confirmation():
 def draw_fortune():
     #app_instance = InteriorApp()
     return interior_app.draw_fortune()
+
+
+print(app.url_map)
 
 
 if __name__ == '__main__':
