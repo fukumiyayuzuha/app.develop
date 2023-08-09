@@ -9,6 +9,9 @@ app.debug = True
 # 静的ファイルの配置場所を指定する場合（デフォルトは 'static' ディレクトリ）
 app.static_folder = 'static'
 
+import os
+
+
 
 class InteriorApp:
     def __init__(self):

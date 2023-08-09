@@ -1,4 +1,5 @@
 <!-- select_layout.html 2番目のHTML -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +9,18 @@
 <body>
     <h1>間取りを選択してください</h1>
     <form action="/select_destiny" method="POST">
-        <fieldset>
-            {% for layout in layouts %}
-            <input id="{{ layout }}" class="radio-inline__input" type="radio" name="layout" value="{{ layout }}"
-                   {% if layout == '3ldk' %}checked="checked"{% endif %}/>
-            <label class="radio-inline__label" for="{{ layout }}">
-                {{ layout }}
-            </label><br>
-            {% endfor %}
-        </fieldset>
+        <div class="sample-form">
+            <input type="radio" name="layout" value="layout1" id="layout1">
+            <label for="layout1"><img src="{{ url_for('static', filename='images/Frame 37.png') }}" width="40%" height="10%"></label><br>
+
+            <input type="radio" name="layout" value="layout2" id="layout2">
+            <label for="layout2"><img src="{{ url_for('static', filename='images/Group 9.png') }}" width="40%" height="10%"></label><br>
+
+            <input type="radio" name="layout" value="layout3" id="layout3">
+            <label for="layout3"><img src="{{ url_for('static', filename='images/Group 10.png') }}" width="40%" height="10%"></label><br>
+        </div>
         <button type="submit">Next</button>
     </form>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-<!-- select_destiny.html 3番目のHTML1 -->
+<!-- select_destiny.html 3番目のHTML -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,6 @@
     <h1>あげたい運気を選んでください</h1>
     <form action="/select_destiny" method="POST">
         <input type="hidden" name="layout" value="{{ selected_layout }}"> <!-- 選択したレイアウトをhiddenフィールドとして送信 -->
-        <fieldset>
             {% for destiny in destinies %}
             <input id="{{ destiny }}" class="radio-inline__input" type="radio" name="destiny" value="{{ destiny }}"
                    {% if not selected_destiny and loop.first %}checked="checked"{% endif %}/> <!-- 最初の選択肢にchecked属性を追加 -->
@@ -17,7 +16,6 @@
                 {{ destiny }}
             </label><br>
             {% endfor %}
-        </fieldset>
         <button type="submit">Next</button>
     </form>
 </body>

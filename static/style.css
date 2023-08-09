@@ -13,7 +13,7 @@ h1 {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin: 0.5em 0; /* マージンを追加 */
+  margin: 0.5em 0;  /*マージンを追加 */
 }
 
 button {
@@ -27,6 +27,7 @@ button {
   text-align: center;
   justify-content: center;
   align-items: center;
+
 }
 
 /* タイトル画面 title.htmlのcssはここで行う */
@@ -42,43 +43,51 @@ button {
   width: auto;
   font-size: 90px;
   padding: 170px;
-  display: inline-block;
+  flex-direction: row;
+  margin-bottom: 20px; /* 画像とタイトルの下の余白を調整 */
 }
 
-/* 間取り選択画面 select_layout.htmlのcssはここで行う */
-fieldset {
-  border: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
+
+/* 間取り選択画面 select_layout.htmlのデザイン　*/
+
+/* ラジオボタンの○を消す */
+input[type="radio"] {
+  display: none;
+}
+/* 画像の周りに隙間をあける */
+label img {
+  margin: 3px;
+  padding: 5px;
+}
+/* 未選択の場合、色を薄くする */
+input[type="radio"] + label img {
+  opacity:0.7;
+}
+/* 選択済みの場合、色を濃くする */
+input[type="radio"]:checked + label img {
+  opacity:1;
 }
 
-/* ラジオボタンのスタイル */
-.radio-inline__input {
-  clip: rect(1px, 1px, 1px, 1px);
-  position: absolute !important;
+/* 運勢選択画面　select_destiny.htmlのデザイン　*/
+/* ラジオボタンの選択肢を縦に並べる */
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
 }
 
-/* カスタムラジオボタンのスタイル */
 .radio-inline__label {
-  display: inline-block;
-  padding: 20px 35px;
-  margin-right: 18px;
-  border-radius: 3px;
-  transition: all .2s;
-  cursor: pointer; /* カーソルを追加 */
-  font-size: 20px;
+  font-size: 50px; /* 任意の文字サイズに調整 */
 }
 
-.radio-inline__input:checked + .radio-inline__label {
-  border-radius: 10px;
-  background: rgba(118, 223, 229, 0.51);
-  text-shadow: 0 0 1px rgba(0,0,0,.7);
-}
 
-.radio-inline__input:focus + .radio-inline__label {
-  outline-color: #4D90FE;
-  outline-offset: -2px;
-  outline-style: auto;
-  outline-width: 5px;
-}
+/*おみくじ結果画面　draw_fortune.htmlのデザイン */
+  .haikei {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-size: 25px;
+    width: 100vw;
+    height: 100vh; /* 画面の高さに合わせる */
+  }
